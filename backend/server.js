@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookieParser");
 
 ////App & Config////
 const app = express();
@@ -17,13 +18,20 @@ app.use(cors({
     ]
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 ////Routes////
+const authRoutes = require("./routes/auth.routes.js");
+const entryRoutes = require("./routes/entries.routes.js");
+const tagRoutes = require("./routes/tags.routes.js");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/entries", entryRoutes);
+app.use("/api/tags", tagRoutes);
+
 app.get("/", (req, res) => {
     res.json({ status: "ok" });
 });
-
-/////////////Import and use routes/////////////
 
 ////Database & Server Startup////
 mongoose

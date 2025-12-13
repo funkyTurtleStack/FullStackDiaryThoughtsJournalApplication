@@ -26,6 +26,11 @@ const entrySchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        summary:
+        {
+            type: String,
+            trim: true,
+        }
     },
     {
         timestamps: true,
