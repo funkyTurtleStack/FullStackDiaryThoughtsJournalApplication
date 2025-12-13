@@ -1,6 +1,7 @@
-import express from "express";
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User.js");
+const { requireAuth } = require("../middleware/auth.middleware.js");
 
 const router = express.Router();
 
@@ -40,10 +41,35 @@ router.post("/logout", (req, res) => {
 });
 
 /**
- * GET /api/auth/me
+ * POST /api/auth/register
  */
-router.get("/me", async (req, res) => {
-  res.json({ message: "TODO" });
+router.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+
+    // Create new user
+    const user = new User({ username, email, password });
+    await user.save();
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
-export default router;
+/**
+ * GET /api/auth/me
+ */
+router.get("/me", requireAuth, async (req, res) => {
+  const user = await User.findById(req.userId).select("_id email username");
+  res.json(user);
+});
+
+module.exports = router;
