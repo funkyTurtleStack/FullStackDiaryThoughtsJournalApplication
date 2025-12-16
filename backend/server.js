@@ -14,7 +14,8 @@ app.use(cors({
     origin: [
         //The frontend origins permitted by cors
         "http://localhost:5173",
-        process.env.CLIENT_ORIGIN
+        "https://fullstackdiarythoughtsjournalapplicat.netlify.app",
+         process.env.CLIENT_ORIGIN
     ]
 }));
 app.use(express.json());
