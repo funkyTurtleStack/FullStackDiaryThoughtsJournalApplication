@@ -10,14 +10,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 ////Middleware////
+const allowedOrigins = [
+  "https://fullstackdiarythoughtsjournalapplicat.netlify.app",
+  "http://localhost:5173",
+  process.env.CLIENT_ORIGIN,
+];
+
 app.use(cors({
-    origin: [
-        //The frontend origins permitted by cors
-        "http://localhost:5173",
-        "https://fullstackdiarythoughtsjournalapplicat.netlify.app",
-         process.env.CLIENT_ORIGIN
-    ],
-    credentials: true
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // allow
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
