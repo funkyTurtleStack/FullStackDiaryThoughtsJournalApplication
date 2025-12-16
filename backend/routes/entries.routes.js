@@ -145,7 +145,7 @@ router.put("/:id", requireAuth, async (req, res) => {
  */
 router.delete("/:id", requireAuth, async (req, res) => {
     try{
-        const deletedEntry = await Entry.findOne({
+        const deletedEntry = await Entry.findOneAndDelete({
             _id: req.params.id,
             user: req.userId
         });
