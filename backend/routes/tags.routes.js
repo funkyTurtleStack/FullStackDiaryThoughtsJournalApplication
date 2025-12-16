@@ -41,7 +41,30 @@ router.get("/", requireAuth, async (req, res) => {
 });
 
 /**
- * PUT /api/tags:id
+ * GET /api/tags/:id
+ * Description: get a specific tag
+ * Access: Private
+ */
+router.get("/:id", requireAuth, async (req, res) => {
+    try{
+        const tag = await Tag.findOne({
+            _id: req.params.id,
+            user: req.userId
+        });
+        
+        if(!tag){
+            return res.status(404).json({message: "Tag not found"});
+        }
+
+        res.json(tag);
+    }
+    catch (err){
+        res.status(500).json({message: err.message});
+    }
+});
+
+/**
+ * PUT /api/tags/:id
  * Description: change a tag
  * Access: Private
  */
