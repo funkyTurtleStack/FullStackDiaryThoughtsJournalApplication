@@ -11,26 +11,69 @@ const router = express.Router();
  * Description: get the list of entries
  * Access: Private
  */
+router.get("/", requireAuth, async (req, res) => {
+    try{
 
+    }
+    catch (err){
 
-/**
- * POST /api/entries - make a new entry
- */
-
-
-/**
- * GET /api/entries/:id - get an individual entry
- */
-
+    }
+});
 
 /**
- * PUT /api/entries/:id - update an entry
+ * POST /api/entries
+ * Description: make a new entry
+ * Access: Private
  */
+router.post("/", requireAuth, async (req, res) => {
+    try{
 
+    }
+    catch (err){
+        
+    }
+});
 
 /**
- * DELETE /api/entries/:id - delete an entry
+ * GET /api/entries/:id
+ * Description: get an individual entry
+ * Access: Private
  */
+router.get("/:id", requireAuth, async (req, res) => {
+    try{
 
+    }
+    catch (err){
+        
+    }
+});
+
+/**
+ * PUT /api/entries/:id
+ * Description: update an entry
+ * Access: Private
+ */
+router.put("/:id", requireAuth, async (req, res) => {
+    try{
+
+    }
+    catch (err){
+        
+    }
+});
+
+/**
+ * DELETE /api/entries/:id
+ * Description: delete an entry
+ * Access: Private
+ */
+router.delete("/:id", requireAuth, async (req, res) => {
+    try{
+
+    }
+    catch (err){
+        
+    }
+});
 
 module.exports = router;
