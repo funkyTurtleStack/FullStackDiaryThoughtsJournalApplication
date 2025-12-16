@@ -16,7 +16,8 @@ app.use(cors({
         "http://localhost:5173",
         "https://fullstackdiarythoughtsjournalapplicat.netlify.app",
          process.env.CLIENT_ORIGIN
-    ]
+    ],
+    credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
