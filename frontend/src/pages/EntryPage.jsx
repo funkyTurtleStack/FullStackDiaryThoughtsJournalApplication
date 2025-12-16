@@ -39,7 +39,6 @@ export default function EntryPage() {
         </button>
       </nav>
 
-      {/* Page Content */}
       <div className="container mt-4">
         <h2>Your Entries</h2>
         <p className="text-muted">Entries will appear here.</p>
