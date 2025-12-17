@@ -47,11 +47,6 @@ try {
         data = await register({ email, password, username });
     }
 
-    if (data.message) {
-        setError(data.message);
-        return;
-    }
-
     if (!data.success) {
         setError(data.message || "Something went wrong");
         return;
