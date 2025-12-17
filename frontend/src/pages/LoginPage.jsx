@@ -52,6 +52,11 @@ try {
         return;
     }
 
+    if (!data.success) {
+        setError(data.message || "Something went wrong");
+        return;
+    }
+
     // Success → go to entries
     navigate("/entries");
     } catch (err) {

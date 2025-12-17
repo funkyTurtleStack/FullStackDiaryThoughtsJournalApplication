@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  res.json({ message: "Logged in" });
+  res.json({ success: true, message: "Logged in" });
 });
 
 /**
