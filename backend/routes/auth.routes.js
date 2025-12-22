@@ -29,14 +29,18 @@ router.post("/login", async (req, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  res.json({ message: "Logged in" });
+  res.json({ success: true, message: "Logged in" });
 });
 
 /**
  * POST /api/auth/logout
  */
 router.post("/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "none",
+    secure: process.env.NODE_ENV === "production",
+  });
   res.json({ message: "Logged out" });
 });
 
